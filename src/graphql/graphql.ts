@@ -750,6 +750,9 @@ export type IconsVehicle = {
   contourDead?: Maybe<Scalars['MediaUrlField']['output']>;
   default?: Maybe<Scalars['MediaUrlField']['output']>;
   large?: Maybe<Scalars['MediaUrlField']['output']>;
+  localContour?: Maybe<Scalars['String']['output']>;
+  localContourAlive?: Maybe<Scalars['String']['output']>;
+  localContourDead?: Maybe<Scalars['String']['output']>;
   localSmall?: Maybe<Scalars['String']['output']>;
   medium?: Maybe<Scalars['MediaUrlField']['output']>;
   small?: Maybe<Scalars['MediaUrlField']['output']>;
@@ -874,11 +877,24 @@ export type MkServiceIcons = {
   __typename?: 'MKServiceIcons';
   camoboost?: Maybe<EntityIcons>;
   flag?: Maybe<EntityIcons>;
+  mastery?: Maybe<Array<Maybe<MasteryRank>>>;
   ribbon?: Maybe<EntityIcons>;
 };
 
 export type MkServiceIconsInterface = {
   icons?: Maybe<MkServiceIcons>;
+};
+
+export type MasteryIcons = {
+  __typename?: 'MasteryIcons';
+  local?: Maybe<Scalars['String']['output']>;
+  web?: Maybe<Scalars['MediaUrlField']['output']>;
+};
+
+export type MasteryRank = {
+  __typename?: 'MasteryRank';
+  icons?: Maybe<MasteryIcons>;
+  level?: Maybe<Scalars['String']['output']>;
 };
 
 export type Nation = {
@@ -1215,7 +1231,7 @@ export type VehiclesQueryVariables = Exact<{
 }>;
 
 
-export type VehiclesQuery = { __typename?: 'GlossaryQuery', vehicles?: Array<{ __typename?: 'Vehicle', title?: any | null, description?: any | null, level?: number | null, icons?: { __typename?: 'IconsVehicle', large?: any | null, medium?: any | null } | null, type?: { __typename?: 'VehicleType', name?: string | null, title?: any | null, icons?: { __typename?: 'IconsVehicleClass', default?: any | null } | null } | null, nation?: { __typename?: 'Nation', name?: string | null, title?: any | null, color?: any | null, icons?: { __typename?: 'NationIcons', small?: any | null, medium?: any | null, large?: any | null } | null } | null } | null> | null };
+export type VehiclesQuery = { __typename?: 'GlossaryQuery', vehicles?: Array<{ __typename?: 'Vehicle', id?: string | null, title?: any | null, description?: any | null, level?: number | null, icons?: { __typename?: 'IconsVehicle', large?: any | null, medium?: any | null } | null, type?: { __typename?: 'VehicleType', name?: string | null, title?: any | null, icons?: { __typename?: 'IconsVehicleClass', default?: any | null } | null } | null, nation?: { __typename?: 'Nation', name?: string | null, title?: any | null, color?: any | null, icons?: { __typename?: 'NationIcons', small?: any | null, medium?: any | null, large?: any | null } | null } | null } | null> | null };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -1235,6 +1251,7 @@ export class TypedDocumentString<TResult, TVariables>
 export const VehiclesDocument = new TypedDocumentString(`
     query Vehicles($languageCode: String = "ru") {
   vehicles(lang: $languageCode) {
+    id
     title
     description
     icons {

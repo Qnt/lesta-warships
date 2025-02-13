@@ -453,6 +453,9 @@ type IconsVehicle {
   contourDead: MediaUrlField
   default: MediaUrlField
   large: MediaUrlField
+  localContour: String
+  localContourAlive: String
+  localContourDead: String
   localSmall: String
   medium: MediaUrlField
   small: MediaUrlField
@@ -556,11 +559,22 @@ type MKRarityIcons {
 type MKServiceIcons {
   camoboost: EntityIcons
   flag: EntityIcons
+  mastery: [MasteryRank]
   ribbon: EntityIcons
 }
 
 interface MKServiceIconsInterface {
   icons: MKServiceIcons
+}
+
+type MasteryIcons {
+  local: String
+  web: MediaUrlField
+}
+
+type MasteryRank {
+  icons: MasteryIcons
+  level: String
 }
 
 scalar MediaUrlField

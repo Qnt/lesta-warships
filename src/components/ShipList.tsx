@@ -1,7 +1,41 @@
 import { useQuery } from '@tanstack/react-query';
-import { VehiclesDocument } from '../api/documents';
-import { execute } from '../api/execute';
-import styles from './ShipList.module.css';
+import { execute } from '../graphql';
+import { ShipCard } from './ShipCard';
+import classes from './ShipList.module.css';
+import { graphql } from '../graphql';
+import { Grid, resolveClassNames, SimpleGrid } from '@mantine/core';
+
+const VehiclesDocument = graphql(`
+  query Vehicles($languageCode: String = "ru") {
+    vehicles(lang: $languageCode) {
+      id
+      title
+      description
+      icons {
+        large
+        medium
+      }
+      level
+      type {
+        name
+        title
+        icons {
+          default
+        }
+      }
+      nation {
+        name
+        title
+        color
+        icons {
+          small
+          medium
+          large
+        }
+      }
+    }
+  }
+`);
 
 export default function ShipList() {
   const languageCode = 'ru';
@@ -16,13 +50,18 @@ export default function ShipList() {
   if (error) return <div>{error.message}</div>;
 
   return (
-    <div className={styles.shipsGrid}>
+    <SimpleGrid
+      cols={{ base: 1, sm: 2, md: 3, lg: 4 }}
+      className={classes.grid}
+    >
       {vehicles &&
         vehicles.length > 0 &&
-        vehicles.map(
-          vehicle => <div key={vehicle?.title}>{vehicle?.title}</div>
-          // <ShipCard key={vehicle?.title} vehicle={vehicle} />
-        )}
-    </div>
+        vehicles
+          .slice(0, 30)
+          .map(
+            vehicle =>
+              vehicle && <ShipCard key={vehicle.id} vehicle={vehicle} />
+          )}
+    </SimpleGrid>
   );
 }

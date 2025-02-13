@@ -1,35 +1,33 @@
+import { Badge, Box, Group, Image, Stack, Title } from '@mantine/core';
 import { Vehicle } from '../graphql/graphql';
-import styles from './ShipCard.module.css';
+import classes from './ShipCard.module.css';
 
 export const ShipCard = ({ vehicle }: { vehicle: Vehicle }) => (
-  <div className={styles.shipCard}>
-    <img
-      src={vehicle?.icons?.medium}
-      alt={vehicle.title}
-      className={styles.shipImage}
-    />
-    <div className={styles.shipInfo}>
-      <h3>{vehicle.title}</h3>
-      <p className={styles.shipLevel}>Уровень: {vehicle.level}</p>
-      <div className={styles.shipMeta}>
-        <span className={styles.shipType}>
-          <img
-            src={vehicle?.type?.icons?.default}
-            alt={vehicle?.type?.title}
-            className={styles.typeIcon}
-          />
+  <Box className={classes.card}>
+    <Box>
+      <Image src={vehicle?.nation?.icons?.large} className={classes.flag} />
+      <Image src={vehicle?.icons?.large} className={classes.ship} />
+    </Box>
+    <Box className={classes.overlay}></Box>
+    <Stack
+      gap="xs"
+      justify="space-between"
+      align="stretch"
+      className={classes.info}
+    >
+      <Group gap="xs">
+        <Title order={4}>{vehicle?.title}</Title>
+        <Image src={vehicle?.type?.icons?.default} className={classes.icon} />
+      </Group>
+      <Group gap="xs">
+        <Badge
+          radius="xs"
+          variant="default"
+        >{`уровень: ${vehicle?.level}`}</Badge>
+        <Badge radius="xs" variant="default">
           {vehicle?.type?.title}
-        </span>
-        <span className={styles.shipNation}>
-          <img
-            src={vehicle?.nation?.icons?.small}
-            alt={vehicle?.nation?.title}
-            className={styles.nationIcon}
-          />
-          {vehicle?.nation?.title}
-        </span>
-      </div>
-      <p className={styles.shipDescription}>{vehicle.description}</p>
-    </div>
-  </div>
+        </Badge>
+      </Group>
+    </Stack>
+  </Box>
 );

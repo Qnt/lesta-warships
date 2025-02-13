@@ -5,7 +5,7 @@ const env = loadEnv(process.env.NODE_ENV ?? 'development', process.cwd(), '');
 
 const config: CodegenConfig = {
   schema: env.VITE_API_URL,
-  documents: ['src/**/*.ts'],
+  documents: ['src/**/*.tsx'],
   ignoreNoDocuments: true,
   generates: {
     './src/graphql/': {
