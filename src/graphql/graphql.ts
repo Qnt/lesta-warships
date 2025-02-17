@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { DocumentTypeDecoration } from '@graphql-typed-document-node/core';
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -1226,56 +1226,36 @@ export type VehiclesInterfaceVehiclesArgs = {
   vehicleIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type VehiclesQueryVariables = Exact<{
+export type Glossary_QueryQueryVariables = Exact<{
+  isCatalogue?: InputMaybe<Scalars['Boolean']['input']>;
   languageCode?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type VehiclesQuery = { __typename?: 'GlossaryQuery', vehicles?: Array<{ __typename?: 'Vehicle', id?: string | null, title?: any | null, description?: any | null, level?: number | null, icons?: { __typename?: 'IconsVehicle', large?: any | null, medium?: any | null } | null, type?: { __typename?: 'VehicleType', name?: string | null, title?: any | null, icons?: { __typename?: 'IconsVehicleClass', default?: any | null } | null } | null, nation?: { __typename?: 'Nation', name?: string | null, title?: any | null, color?: any | null, icons?: { __typename?: 'NationIcons', small?: any | null, medium?: any | null, large?: any | null } | null } | null } | null> | null };
+export type Glossary_QueryQuery = (
+  { __typename?: 'GlossaryQuery' }
+  & { ' $fragmentRefs'?: { 'Vehicles_QueryFragmentFragment': Vehicles_QueryFragmentFragment;'Filters_QueryFragmentFragment': Filters_QueryFragmentFragment } }
+);
 
-export class TypedDocumentString<TResult, TVariables>
-  extends String
-  implements DocumentTypeDecoration<TResult, TVariables>
-{
-  __apiType?: DocumentTypeDecoration<TResult, TVariables>['__apiType'];
+export type Nations_QueryFragmentFragment = { __typename?: 'GlossaryQuery', nations?: Array<{ __typename?: 'Nation', name?: string | null, title?: any | null } | null> | null } & { ' $fragmentName'?: 'Nations_QueryFragmentFragment' };
 
-  constructor(private value: string, public __meta__?: Record<string, any> | undefined) {
-    super(value);
-  }
+export type Filters_QueryFragmentFragment = (
+  { __typename?: 'GlossaryQuery' }
+  & { ' $fragmentRefs'?: { 'Nations_QueryFragmentFragment': Nations_QueryFragmentFragment;'VehicleTypes_QueryFragmentFragment': VehicleTypes_QueryFragmentFragment } }
+) & { ' $fragmentName'?: 'Filters_QueryFragmentFragment' };
 
-  toString(): string & DocumentTypeDecoration<TResult, TVariables> {
-    return this.value;
-  }
-}
+export type VehicleTypes_QueryFragmentFragment = { __typename?: 'GlossaryQuery', vehicleTypes?: Array<{ __typename?: 'VehicleType', title?: any | null, name?: string | null } | null> | null } & { ' $fragmentName'?: 'VehicleTypes_QueryFragmentFragment' };
 
-export const VehiclesDocument = new TypedDocumentString(`
-    query Vehicles($languageCode: String = "ru") {
-  vehicles(lang: $languageCode) {
-    id
-    title
-    description
-    icons {
-      large
-      medium
-    }
-    level
-    type {
-      name
-      title
-      icons {
-        default
-      }
-    }
-    nation {
-      name
-      title
-      color
-      icons {
-        small
-        medium
-        large
-      }
-    }
-  }
-}
-    `) as unknown as TypedDocumentString<VehiclesQuery, VehiclesQueryVariables>;
+export type Vehicle_QueryFragmentFragment = { __typename?: 'Vehicle', title?: any | null, level?: number | null, description?: any | null, icons?: { __typename?: 'IconsVehicle', large?: any | null } | null, type?: { __typename?: 'VehicleType', title?: any | null, icons?: { __typename?: 'IconsVehicleClass', default?: any | null } | null } | null, nation?: { __typename?: 'Nation', title?: any | null, color?: any | null, icons?: { __typename?: 'NationIcons', large?: any | null } | null } | null } & { ' $fragmentName'?: 'Vehicle_QueryFragmentFragment' };
+
+export type Vehicles_QueryFragmentFragment = { __typename?: 'GlossaryQuery', vehicles?: Array<(
+    { __typename?: 'Vehicle', id?: string | null, level?: number | null, nation?: { __typename?: 'Nation', name?: string | null } | null, type?: { __typename?: 'VehicleType', name?: string | null } | null }
+    & { ' $fragmentRefs'?: { 'Vehicle_QueryFragmentFragment': Vehicle_QueryFragmentFragment } }
+  ) | null> | null } & { ' $fragmentName'?: 'Vehicles_QueryFragmentFragment' };
+
+export const Nations_QueryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Nations_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GlossaryQuery"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"lang"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<Nations_QueryFragmentFragment, unknown>;
+export const VehicleTypes_QueryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"VehicleTypes_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GlossaryQuery"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"vehicleTypes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"lang"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<VehicleTypes_QueryFragmentFragment, unknown>;
+export const Filters_QueryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Filters_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GlossaryQuery"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Nations_QueryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"VehicleTypes_QueryFragment"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Nations_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GlossaryQuery"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"lang"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"VehicleTypes_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GlossaryQuery"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"vehicleTypes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"lang"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<Filters_QueryFragmentFragment, unknown>;
+export const Vehicle_QueryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Vehicle_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Vehicle"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"icons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"large"}}]}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"icons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"default"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"nation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"icons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"large"}}]}}]}}]}}]} as unknown as DocumentNode<Vehicle_QueryFragmentFragment, unknown>;
+export const Vehicles_QueryFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Vehicles_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GlossaryQuery"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"vehicles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"isCatalogue"},"value":{"kind":"Variable","name":{"kind":"Name","value":"isCatalogue"}}},{"kind":"Argument","name":{"kind":"Name","value":"lang"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"nation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"Vehicle_QueryFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Vehicle_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Vehicle"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"icons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"large"}}]}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"icons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"default"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"nation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"icons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"large"}}]}}]}}]}}]} as unknown as DocumentNode<Vehicles_QueryFragmentFragment, unknown>;
+export const Glossary_QueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Glossary_Query"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"isCatalogue"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean"}},"defaultValue":{"kind":"BooleanValue","value":true}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}},"defaultValue":{"kind":"StringValue","value":"ru","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Vehicles_QueryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"Filters_QueryFragment"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Vehicle_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Vehicle"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"icons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"large"}}]}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"icons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"default"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"nation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"icons"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"large"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Nations_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GlossaryQuery"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"lang"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"VehicleTypes_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GlossaryQuery"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"vehicleTypes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"lang"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Vehicles_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GlossaryQuery"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"vehicles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"isCatalogue"},"value":{"kind":"Variable","name":{"kind":"Name","value":"isCatalogue"}}},{"kind":"Argument","name":{"kind":"Name","value":"lang"},"value":{"kind":"Variable","name":{"kind":"Name","value":"languageCode"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"level"}},{"kind":"Field","name":{"kind":"Name","value":"nation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"type"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"Vehicle_QueryFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Filters_QueryFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GlossaryQuery"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Nations_QueryFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"VehicleTypes_QueryFragment"}}]}}]} as unknown as DocumentNode<Glossary_QueryQuery, Glossary_QueryQueryVariables>;

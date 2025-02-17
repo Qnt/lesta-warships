@@ -1,0 +1,13 @@
+.container {
+  position: relative;
+}
+
+.flag {
+  width: 100%;
+  filter: opacity(0.5);
+}
+
+.ship {
+  position: absolute;
+  inset: 0;
+}

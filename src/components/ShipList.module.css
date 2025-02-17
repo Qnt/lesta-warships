@@ -1,7 +1,0 @@
-.grid {
-  margin-inline: auto;
-  max-width: 90%;
-  @mixin larger-than $mantine-breakpoint-lg {
-    max-width: rem(1200px);
-  }
-}

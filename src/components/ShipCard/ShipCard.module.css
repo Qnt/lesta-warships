@@ -1,7 +1,7 @@
 .card {
   position: relative;
-  overflow: hidden;
   cursor: pointer;
+  isolation: isolate;
 }
 
 .overlay {
@@ -11,10 +11,9 @@
   inset: 0;
   inline-size: 100%;
   block-size: 100%;
-  justify-content: flex-end;
   background: linear-gradient(
     0deg,
-    alpha(var(--mantine-color-blue-3), 0.2) 0%,
+    alpha(var(--nation-color), 0.2) 0%,
     transparent 30%,
     transparent 100%
   );
@@ -22,15 +21,23 @@
 }
 
 .info {
-  padding: var(--mantine-spacing-xs);
+  padding-inline: var(--mantine-spacing-xs);
+  padding-block-end: var(--mantine-spacing-xs);
+  padding-block-start: 0;
+}
+
+.title {
+  text-transform: uppercase;
+  color: var(--mantine-color-yellow-4);
 }
 
 .flag {
   width: 100%;
-  filter: opacity(0.5);
+  filter: opacity(0.7);
 }
 
 .ship {
   position: absolute;
   inset: 0;
+  transition: transform 200ms;
 }
