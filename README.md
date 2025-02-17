@@ -5,6 +5,11 @@
 ## Установка и запуск
 
 1. Склонировать репозиторий.
+
+```bash
+git clone https://github.com/Qnt/lesta-warships.git
+```
+
 2. Установить зависимости.
 
 ```bash
